@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    
+    public $components = array('DebugKit.Toolbar');
     public $paginate = array(
         'limit' => 10 ,
         'order' => array('Post.id' => 'Desc')
@@ -68,9 +68,10 @@ public $helpers = array('Html', 'Form', 'Session','Js');
     }
     
     public function isAuthorized($usuario) {
-    if (isset($usuario['role']) && $usuario['role'] === 'admin') {
-        return true; // Admin pode acessar todas actions
+        if (isset($usuario['role']) && $usuario['role'] === 'admin') {
+            return true; // Admin pode acessar todas actions
+        }
+        return false; // Os outros usuários não podem
     }
-    return false; // Os outros usuários não podem
-}
+
 }
