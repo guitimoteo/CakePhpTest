@@ -41,9 +41,9 @@ class AppController extends Controller {
         'Session',
         'Auth' => array(
             'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
-            'logoutRedirect'    => array('controller' => 'comentarios', 'action' => 'index', 'home'),
-            'authorize'         => array('Controller'), // Adicionamos essa linha
-//            'RequestHandler',
+            'logoutRedirect'    => array('controller' => 'pages', 'action' => 'index', 'home'),
+            /*'authorize'         => array('Controller'),*/ // Linha retirada: erro ao identificar o root como controller
+            'RequestHandler',
             
         )
         ,'DebugKit.Toolbar'//Para o debug da página. O log de erro esta no diretório tmp
@@ -61,6 +61,11 @@ class AppController extends Controller {
 		'action'     => 'login',
 		'plugin'     => null
 	);
+        $this->Auth->loginRedirect = array(
+            'plugin'        => null,
+            'controller'    => 'comentarios',
+            'action'        => 'index',
+        );
         $this->Auth->logoutRedirect = array(
             'plugin'        => null,
             'controller'    => 'comentarios',
