@@ -16,8 +16,9 @@ class UsuariosController extends AppController {
     public $name        = 'Usuarios';
     public $components  = array('Session');
     function index(){
-        //$this->set('usuarios', $this->Usuario->find('all'));
-        $this->redirect(array('action' => 'index'));
+        CakeLog::write('info','UsuariosController index()');
+        $this->set('usuarios', $this->Usuario->find('all'));
+//        $this->redirect(array('action' => 'index'));
     }
     
     //TODO: Verificar autorização específica de cada usuário
@@ -68,18 +69,22 @@ class UsuariosController extends AppController {
      * @throws NotFoundException
      */
     public function edit($id = null) {
+        CakeLog::write('info','UsuariosController edit('.$id.')');
         $this->Usuario->id = $id;
         if (!$this->Usuario->exists()) {
+            CakeLog::write('info','!$this->Usuario->exists()');
             throw new NotFoundException(__('Usuário inválido'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Usuario->save($this->request->data)) {
+                CakeLog::write('info','edit(), $this->Usuario->save($this->request->data)');
                 $this->Session->setFlash(__('Usuário salvo'));
                 $this->redirect(array('controller' => 'comentarios', 'action' => 'index'));
             } else {
                 $this->Session->setFlash(__('O usuario não pode ser salvo. Por favor, tente novamente.'));
             }
         } else {
+            CakeLog::write('info', 'edit, unset($this->request->data["Usuario"]["password"]);');
             $this->request->data = $this->User->read(null, $id);
             unset($this->request->data['Usuario']['password']);
         }
@@ -92,22 +97,29 @@ class UsuariosController extends AppController {
      * @throws NotFoundException
      */
     public function delete($id = null) {
+        CakeLog::write('info','delete('.$id.')');
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
         $this->Usuario->id = $id;
         if (!$this->Usuario->exists()) {
+            CakeLog::write('info','!$this->Usuario->exists()');
             throw new NotFoundException(__('Usuário inválido'));
         }
         if ($this->Usuario->delete()) {
+            CakeLog::write('info','$this->Usuario->delete()');
             $this->Session->setFlash(__('Usuário deletado'));
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('Usuário não foi deletado'));
         $this->redirect(array('action' => 'index'));
     }
-
+/**
+ * Função para autenticação do usuário
+ * @return type
+ */
     public function login() {
+        CakeLog::write('info','UsuariosController login()');
         $this->set('title_for_layout', __('Log in'));
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -119,7 +131,9 @@ class UsuariosController extends AppController {
             }
         }
     }
-
+/**
+ * Função para finalizar a autenticação do usuário da sessão
+ */
     public function logout() {
     $this->redirect($this->Auth->logout());
 }

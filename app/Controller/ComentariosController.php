@@ -16,6 +16,7 @@ class ComentariosController extends AppController{
     public $components  = array('Session');
     public $helpers     = array('Html','Form', 'Session');
     function index() {
+        CakeLog::write('info','ComentariosController index()');
         $this->set('comentarios', $this->Comentario->find('all'));
         $this->paginate['Comentario']['limit'] = 10;
         $this->set('comentarios', $this->paginate());
@@ -54,6 +55,7 @@ class ComentariosController extends AppController{
      * @param type $id
      */
     function edit($id = null) {
+        CakeLog::write('info','ComentariosController edit('.$id.')');
         $this->Comentario->id = $id;
         if ($this->request->is('get')) {
             $this->request->data = $this->Comentario->read();
@@ -66,12 +68,14 @@ class ComentariosController extends AppController{
     }
 
     /**
-     * Deleta comentário
+     * Deleta o comentário
      * @param type $id
      * @throws MethodNotAllowedException
      */
     function delete($id) {
+        CakeLog::write('info','ComentariosController edit('.$id.')');
         if (!$this->request->is('post')) {
+            $this->log('!$this->request->is(post)');
             throw new MethodNotAllowedException();
         }
         if ($this->Comentario->delete($id)) {
@@ -81,6 +85,7 @@ class ComentariosController extends AppController{
     }
 
     public function isAuthorized($usuario=null) {
+    CakeLog::write('info','ComentariosController isAuthorized('.$usuario.')');
     if (!parent::isAuthorized($usuario)) {
         if ($this->action === 'add') {
             // Todos os usuários registrados podem criar posts

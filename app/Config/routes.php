@@ -33,9 +33,11 @@
 
         	// ROTAS DE COMENTARIOS
 	Router::connect('/comentarios/login', array('controller' => 'Usuarios', 'action' => 'login'));
-	Router::connect('/arrayenterprises/arrayenterprises/', array('controller' => 'comentarios', 'action' => 'index'));
+	Router::connect('/arrayenterprises/index', array('controller' => 'comentarios', 'action' => 'index'));
 	Router::connect('/comentarios/logout', array('controller' => 'Usuarios', 'action' => 'logout'));
-	Router::connect('/comentarios/inserir', array('controller' => 'Usuarios', 'action' => 'inserir')); 
+	Router::connect('/comentarios/add', array('controller' => 'Usuarios', 'action' => 'add')); 
+        Router::connect('/comentarios/edit', array('controller' => 'Usuarios', 'action' => 'edit')); 
+        Router::connect('/comentarios/delete', array('controller' => 'Usuarios', 'action' => 'delete')); 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

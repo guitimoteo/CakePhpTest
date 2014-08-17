@@ -43,7 +43,7 @@ class AppController extends Controller {
             'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
             'logoutRedirect'    => array('controller' => 'comentarios', 'action' => 'index', 'home'),
             'authorize'         => array('Controller'), // Adicionamos essa linha
-            'RequestHandler',
+//            'RequestHandler',
             
         )
         ,'DebugKit.Toolbar'//Para o debug da página. O log de erro esta no diretório tmp

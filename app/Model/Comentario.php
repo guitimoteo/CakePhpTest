@@ -12,13 +12,15 @@
  * @author gregory
  */
 class Comentario extends AppModel{
-    public $name = 'Comentario';
+    public $name        = 'Comentario';
        public $validate = array(
            'comentario' => array(
             'rule' => 'notEmpty'
         )
     );
        public function isOwnedBy($post, $user) {
-		return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
+                $returnId = $this->field('id', array('id' => $post, 'user_id' => $user));
+		CakeLog::write('debug', 'Comentario isOwnedBy('.$post.', '.$user.') === '.$returnId.'');
+                return $returnId  === $post;
 	}
 }
