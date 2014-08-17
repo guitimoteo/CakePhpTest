@@ -59,7 +59,8 @@ class ComentariosController extends AppController{
         $this->Comentario->id = $id;
 //        Substitui a authorização por Acl
         if($this->isAuthorized($this->Auth->user())===false){
-            throw new MethodNotAllowedException();
+            $this->Session->setFlash('Este não é o seu comentário');
+            $this->redirect(array('action' => 'index'));
         }
         if ($this->request->is('get')) {
             $this->request->data = $this->Comentario->read();
@@ -77,7 +78,11 @@ class ComentariosController extends AppController{
      * @throws MethodNotAllowedException
      */
     function delete($id) {
-        CakeLog::write('info','ComentariosController edit('.$id.')');
+        CakeLog::write('info','ComentariosController delete('.$id.')');
+        if($this->isAuthorized($this->Auth->user())===false){
+            $this->Session->setFlash('Este não é o seu comentário');
+            $this->redirect(array('action' => 'index'));
+        }
         if (!$this->request->is('post')) {
             $this->log('!$this->request->is(post)');
             throw new MethodNotAllowedException();
