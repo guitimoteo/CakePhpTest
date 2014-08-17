@@ -42,7 +42,8 @@ class AppController extends Controller {
         'Auth' => array(
             'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
             'logoutRedirect'    => array('controller' => 'pages', 'action' => 'index', 'home'),
-            /*'authorize'         => array('Controller'),*/ // Linha retirada: erro ao identificar o root como controller
+//            'authorize'         => array('Controller'),// Linha retirada: erro ao identificar o root como controller
+//            'authorize'         => array('Actions' => array('actionPath' => 'controllers')),
             'RequestHandler',
             
         )
@@ -50,6 +51,7 @@ class AppController extends Controller {
     );
 
     function beforeFilter() {
+        $this->Auth->a
         $this->Auth->allow('index', 'view','login','add','logout');
         //Definicao do formulario para login
         $this->Auth->authenticate = array(
@@ -57,9 +59,9 @@ class AppController extends Controller {
         AuthComponent::ALL => array('userModel' => 'Usuario','fields' => array('username' => 'email')),'Form');
         
         $this->Auth->loginAction = array(
-		'controller' => 'usuarios',
-		'action'     => 'login',
-		'plugin'     => null
+            'plugin'        => null,
+            'controller'    => 'usuarios',
+            'action'        => 'login'
 	);
         $this->Auth->loginRedirect = array(
             'plugin'        => null,
