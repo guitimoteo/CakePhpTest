@@ -93,6 +93,11 @@ class ComentariosController extends AppController{
         }
     }
 
+    /**
+     * Verifica se o usuário é o autor do comentário.
+     * @param type $usuario ($this->Auth->user())
+     * @return boolean
+     */
     public function isAuthorized($usuario=null) {
     CakeLog::write('info','ComentariosController isAuthorized('.$usuario.')');
     if (!parent::isAuthorized($usuario)) {

@@ -2,7 +2,10 @@
 
 <h1>Blog posts</h1>
 <?php
-echo $this->Html->link('Add Post', array('controller' => 'comentarios', 'action' => 'add'));
+echo $this->Html->link('Comente!', array('controller' => 'comentarios', 'action' => 'add'));
+echo $this->Html->link('Log in', array('controller' => 'usuarios', 'action' => 'login'));
+echo $this->Html->link('Cadastre-se', array('controller' => 'usuarios', 'action' => 'add'));
+echo $this->Html->link('Log out', array('controller' => 'usuarios', 'action' => 'logout'));
 ?>
 <table>
     <tr>
@@ -14,7 +17,7 @@ echo $this->Html->link('Add Post', array('controller' => 'comentarios', 'action'
         <th>Ação</th>
     </tr>
 
-    <!-- Here is where we loop through our $comentarios array, printing out comentarios info -->
+    <!-- Listagem de todo o array de comentários -->
 
     <?php foreach ($comentarios as $comentario): ?>
     <tr>

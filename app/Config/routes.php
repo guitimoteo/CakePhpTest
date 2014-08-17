@@ -30,14 +30,7 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-
-        	// ROTAS DE COMENTARIOS
-	Router::connect('/comentarios/login', array('controller' => 'Usuarios', 'action' => 'login'));
-	Router::connect('/arrayenterprises/index', array('controller' => 'comentarios', 'action' => 'index'));
-	Router::connect('/comentarios/logout', array('controller' => 'Usuarios', 'action' => 'logout'));
-	Router::connect('/comentarios/add', array('controller' => 'Usuarios', 'action' => 'add')); 
-        Router::connect('/comentarios/edit', array('controller' => 'Usuarios', 'action' => 'edit')); 
-        Router::connect('/comentarios/delete', array('controller' => 'Usuarios', 'action' => 'delete')); 
+ 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

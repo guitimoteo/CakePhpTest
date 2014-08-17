@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of Comentario
+ * Model do comentário
  *
  * @author guilherme
  */
@@ -18,9 +18,13 @@ class Comentario extends AppModel{
             'rule' => 'notEmpty'
         )
     );
+       /**
+        * Verifica se o poste pertence ao usuário
+        * @param type $post
+        * @param type $user
+        * @return type
+        */
        public function isOwnedBy($post, $user) {
-                $returnId = $this->field('id', array('id' => $post, 'user_id' => $user));
-		CakeLog::write('debug', 'Comentario isOwnedBy('.$post.', '.$user.') === '.$returnId.'');
                 return $post == $this->field('id', array('id' => $post, 'user_id' => $user));
 	}
 }
