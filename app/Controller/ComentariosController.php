@@ -57,6 +57,10 @@ class ComentariosController extends AppController{
     function edit($id = null) {
         CakeLog::write('info','ComentariosController edit('.$id.')');
         $this->Comentario->id = $id;
+//        Substitui a authorização por Acl
+        if($this->isAuthorized($this->Auth->user())===false){
+            throw new MethodNotAllowedException();
+        }
         if ($this->request->is('get')) {
             $this->request->data = $this->Comentario->read();
         } else {
@@ -93,7 +97,6 @@ class ComentariosController extends AppController{
         }
         if (in_array($this->action, array('edit', 'delete'))) {
             $postId = (int) $this->request->params['pass'][0];
-//            $postId = (int) $this->request->params['id'];
             return $this->Comentario->isOwnedBy($postId, $usuario['id']);
         }
     }

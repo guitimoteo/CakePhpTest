@@ -9,7 +9,7 @@
 /**
  * Description of Comentario
  *
- * @author gregory
+ * @author guilherme
  */
 class Comentario extends AppModel{
     public $name        = 'Comentario';
@@ -21,6 +21,6 @@ class Comentario extends AppModel{
        public function isOwnedBy($post, $user) {
                 $returnId = $this->field('id', array('id' => $post, 'user_id' => $user));
 		CakeLog::write('debug', 'Comentario isOwnedBy('.$post.', '.$user.') === '.$returnId.'');
-                return $returnId  === $post;
+                return $this->field('id', array('id' => $post, 'user_id' => $user))=== $post;
 	}
 }

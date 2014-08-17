@@ -51,7 +51,7 @@ class AppController extends Controller {
     );
 
     function beforeFilter() {
-        $this->Auth->a
+        
         $this->Auth->allow('index', 'view','login','add','logout');
         //Definicao do formulario para login
         $this->Auth->authenticate = array(
