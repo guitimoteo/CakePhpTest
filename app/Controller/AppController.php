@@ -31,22 +31,24 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar');
-    public $paginate = array(
+    public $helpers     = array('Html', 'Form', 'Session','Js');
+    public $paginate    = array(
         'limit' => 10 ,
-        'order' => array('Post.id' => 'Desc')
+        'order' => array('Comentario.id' => 'Desc')
     );
     
     public $components = array(
         'Session',
         'Auth' => array(
-            'loginRedirect' => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller'), // Adicionamos essa linha
-            'RequestHandler'
+            'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
+            'logoutRedirect'    => array('controller' => 'comentarios', 'action' => 'index', 'home'),
+            'authorize'         => array('Controller'), // Adicionamos essa linha
+            'RequestHandler',
+            
         )
+        ,'DebugKit.Toolbar'//Para o debug da página. O log de erro esta no diretório tmp
     );
-public $helpers = array('Html', 'Form', 'Session','Js');
+
     function beforeFilter() {
         $this->Auth->allow('index', 'view','login','add','logout');
         //Definicao do formulario para login
@@ -60,9 +62,9 @@ public $helpers = array('Html', 'Form', 'Session','Js');
 		'plugin'     => null
 	);
         $this->Auth->logoutRedirect = array(
-            'plugin' => null,
-            'controller' => 'comentarios',
-            'action' => 'index',
+            'plugin'        => null,
+            'controller'    => 'comentarios',
+            'action'        => 'index',
         );
         $this->Auth->authError = __('É necessário autorização para esta ação.');
     }
