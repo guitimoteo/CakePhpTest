@@ -40,7 +40,7 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Auth' => array(
-            'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),//'authorize' => array('controller'), // essa linha é tensa 
+            'loginRedirect'     => array('userModel' => 'Usuario', 'action' => 'index'),
             'logoutRedirect'    => array('controller' => 'pages', 'action' => 'index', 'home'),
 //            'authorize'         => array('Controller'),// Linha retirada: erro ao identificar o root como controller
 //            'authorize'         => array('Actions' => array('actionPath' => 'controllers')),
@@ -75,7 +75,11 @@ class AppController extends Controller {
         );
         $this->Auth->authError = __('É necessário autorização para esta ação.');
     }
-    
+    /**
+     * Verifica se o usuario é o administrador da página
+     * @param type $usuario
+     * @return boolean
+     */
     public function isAuthorized($usuario) {
         if (isset($usuario['role']) && $usuario['role'] === 'admin') {
             return true; // Admin pode acessar todas actions

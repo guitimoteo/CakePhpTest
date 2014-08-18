@@ -16,6 +16,7 @@ class ComentariosController extends AppController{
     public $components  = array('Session');
     public $helpers     = array('Html','Form', 'Session');
     function index() {
+        $this->loadModel('Usuario');
         CakeLog::write('info','ComentariosController index()');
         $this->set('comentarios', $this->Comentario->find('all'));
         $this->paginate['Comentario']['limit'] = 10;
@@ -114,7 +115,7 @@ class ComentariosController extends AppController{
             return $this->Comentario->isOwnedBy($postId, $usuario['id']);
         }
     }
-    return false;
+    return true;
 }
     
 }

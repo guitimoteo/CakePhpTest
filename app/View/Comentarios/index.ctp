@@ -5,7 +5,7 @@
 echo $this->Html->link('Comente!', array('controller' => 'comentarios', 'action' => 'add')), '&nbsp;';
 echo $this->Html->link('Log in', array('controller' => 'usuarios', 'action' => 'login')), '&nbsp;';
 echo $this->Html->link('Cadastre-se', array('controller' => 'usuarios', 'action' => 'add')), '&nbsp;';
-echo $this->Html->link('Área do usuário', array('controller' => 'usuarios', 'action' => 'edit', $this->Auth->user)), '&nbsp;';
+echo $this->Html->link('Área do usuário', array('controller' => 'usuarios', 'action' => 'edit')), '&nbsp;';
 echo $this->Html->link('Log out', array('controller' => 'usuarios', 'action' => 'logout')), '&nbsp;';
 
 ?>
@@ -24,7 +24,8 @@ echo $this->Html->link('Log out', array('controller' => 'usuarios', 'action' => 
     <?php foreach ($comentarios as $comentario): ?>
     <tr>
         <td><?php echo $comentario['Comentario']['id']; ?></td>
-        <td><?php echo $comentario['Comentario']['user']; ?></td>
+        <td><?php echo $comentario['Comentario']['user'];
+                  $id_user = $comentario['Comentario']['user_id'];?></td>
         <td>
             <?php echo $this->Html->link($comentario['Comentario']['comentario'],
 array('controller' => 'comentarios', 'action' => 'view', $comentario['Comentario']['id'])); ?>

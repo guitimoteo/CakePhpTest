@@ -55,9 +55,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
 				);
 			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
+			
 		</div>
 	</div>
 	<?php //echo $this->element('sql_dump'); ?>
