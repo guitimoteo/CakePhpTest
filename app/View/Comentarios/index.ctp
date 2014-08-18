@@ -2,10 +2,12 @@
 
 <h1>Blog posts</h1>
 <?php
-echo $this->Html->link('Comente!', array('controller' => 'comentarios', 'action' => 'add'));
-echo $this->Html->link('Log in', array('controller' => 'usuarios', 'action' => 'login'));
-echo $this->Html->link('Cadastre-se', array('controller' => 'usuarios', 'action' => 'add'));
-echo $this->Html->link('Log out', array('controller' => 'usuarios', 'action' => 'logout'));
+echo $this->Html->link('Comente!', array('controller' => 'comentarios', 'action' => 'add')), '&nbsp;';
+echo $this->Html->link('Log in', array('controller' => 'usuarios', 'action' => 'login')), '&nbsp;';
+echo $this->Html->link('Cadastre-se', array('controller' => 'usuarios', 'action' => 'add')), '&nbsp;';
+echo $this->Html->link('Área do usuário', array('controller' => 'usuarios', 'action' => 'edit', $this->Auth->user)), '&nbsp;';
+echo $this->Html->link('Log out', array('controller' => 'usuarios', 'action' => 'logout')), '&nbsp;';
+
 ?>
 <table>
     <tr>

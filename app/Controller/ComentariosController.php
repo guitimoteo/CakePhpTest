@@ -38,6 +38,10 @@ class ComentariosController extends AppController{
      * @return type
      */
     function  add(){
+        if($this->Auth->user()==null){
+            $this->Session->setFlash(__('Por favor, identifique-se'));
+            $this->redirect(array('controller' => 'usuarios','action' => 'login'));
+        }
         if($this->request->is('post')){
             $this->Comentario->create();
             $this->request->data['Comentario']['user_id'] = $this->Auth->user('id'); // Autentica o usuario
@@ -94,7 +98,7 @@ class ComentariosController extends AppController{
     }
 
     /**
-     * Verifica se o usuário é o autor do comentário.
+     * Verifica se o usuário é o autor do comentário, ou se é um o administrador da página.
      * @param type $usuario ($this->Auth->user())
      * @return boolean
      */

@@ -12,9 +12,9 @@
  * @author guilherme
  */
 class UsuariosController extends AppController {
-    public $helpers     = array('Html','Form');
-    public $name        = 'Usuarios';
     public $components  = array('Session');
+    public $helpers     = array('Html','Form','Session');
+    public $name        = 'Usuarios';
     function index(){
         CakeLog::write('info','UsuariosController index()');
         $this->set('usuarios', $this->Usuario->find('all'));
@@ -70,12 +70,16 @@ class UsuariosController extends AppController {
      */
     public function edit($id = null) {
         CakeLog::write('info','UsuariosController edit('.$id.')');
-        $this->Usuario->id = $id;
+        $this->Usuario->id = $this->Auth->user('id');
         if (!$this->Usuario->exists()) {
             CakeLog::write('info','!$this->Usuario->exists()');
             throw new NotFoundException(__('Usuário inválido'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            if (is_uploaded_file($this->request->data['Usuario']['Foto']['tmp_name'])) {
+                $arquivo = fread(fopen($this->request->data['Usuario']['Foto']['tmp_name'], "r"), $this->request->data['Usuario']['Foto']['size']);
+                $this->request->data['Usuario']['foto'] = $arquivo;
+            }
             if ($this->Usuario->save($this->request->data)) {
                 CakeLog::write('info','edit(), $this->Usuario->save($this->request->data)');
                 $this->Session->setFlash(__('Usuário salvo'));
@@ -85,7 +89,7 @@ class UsuariosController extends AppController {
             }
         } else {
             CakeLog::write('info', 'edit, unset($this->request->data["Usuario"]["password"]);');
-            $this->request->data = $this->User->read(null, $id);
+            $this->request->data = $this->Usuario->read(null, $id);
             unset($this->request->data['Usuario']['password']);
         }
     }
